@@ -41,8 +41,10 @@ public class AuthenticationService {
     private final EmailService emailService;
   private final AuthenticationManager authenticationManager;
   private final TwoFactorAuthenticationService tfaService;
+
+    @Value("http://localhost:4200/activate-account")
     private  String activationUrl;
-   // @Value("http://localhost:4200/activate-account")
+
   public AuthenticationResponse register(RegisterRequest request) throws MessagingException {
  var user=User.builder()
          .firstname(request.getFirstname())
