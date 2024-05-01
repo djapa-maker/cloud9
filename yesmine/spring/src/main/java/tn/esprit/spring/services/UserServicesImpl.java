@@ -5,10 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entities.ChangePasswordRequest;
-import tn.esprit.spring.entities.User;
+import tn.esprit.spring.entities.User2;
 import tn.esprit.spring.repositories.IUserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import tn.esprit.spring.repositories.IUserRepository;
+
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
@@ -19,40 +21,41 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class UserServicesImpl implements IUserServices {
 
-    private IUserRepository userRepository;
+    private IUserRepository UserRepository;
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User addUser(User instructor) {
-        return userRepository.save(instructor);
+    public User2 addUser2(User2 instructor) {
+        return UserRepository.save(instructor);
     }
 
     @Override
-    public List<User> retrieveAllUsers() {
-        return userRepository.findAll();
+    public List<User2> retrieveAllUser2s() {
+        return UserRepository.findAll();
     }
 
     @Override
-    public User updateUser(User instructor) {
-        return userRepository.save(instructor);
+    public User2 updateUser2(User2 instructor) {
+        return UserRepository.save(instructor);
     }
 
     @Override
-    public User retrieveUser(Long IdUser) {
-        return userRepository.findById(IdUser).orElse(null);
-    }
-    @Override
-    public void removeUser(Long IdUser) {
-        userRepository.deleteById(IdUser);
+    public User2 retrieveUser2(Long IdUser2) {
+        return UserRepository.findById(IdUser2).orElse(null);
     }
 
     @Override
-    public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
+    public void removeUser2(Long IdUser2) {
+        UserRepository.deleteById(IdUser2);
+    }
 
-        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+    @Override
+    public void changePassword(ChangePasswordRequest request, Principal connectedUser2) {
+
+        /*var User2 = (User2) ((UsernamePasswordAuthenticationToken) connectedUser2).getPrincipal();
 
         // check if the current password is correct
-        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(request.getCurrentPassword(), User2.getPassword())) {
             throw new IllegalStateException("Wrong password");
         }
         // check if the two new passwords are the same
@@ -61,10 +64,11 @@ public class UserServicesImpl implements IUserServices {
         }
 
         // update the password
-        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        User2.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
         // save the new password
-        userRepository.save(user);
+        User2Repository.save(User2);
     }
-
+*/
+    }
 }

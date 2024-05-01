@@ -36,7 +36,7 @@ public class SecurityConfiguration {
             "/webjars/**",
             "/swagger-ui.html"};*/
     private final JwtAuthenticationFilter jwtAuthFilter;
-    private final AuthenticationProvider authenticationProvider;
+    //private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
 
     @Bean
@@ -55,8 +55,8 @@ public class SecurityConfiguration {
                 .sessionManagement()
                 .sessionCreationPolicy(STATELESS)
                 .and()
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter,UsernamePasswordAuthenticationFilter.class)
+                //.authenticationProvider(authenticationProvider)
+                //.addFilterBefore(jwtAuthFilter,UsernamePasswordAuthenticationFilter.class)
                 .logout()
                 .logoutUrl("/api/v1/auth/logout")
                 .addLogoutHandler(logoutHandler)

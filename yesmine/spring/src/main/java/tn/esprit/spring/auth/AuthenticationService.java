@@ -58,21 +58,21 @@ public class AuthenticationService {
       if(request.isMfaEnabled()){
           user.setSecret(tfaService.generateNewSecret());
       }
-      var savedUser= repository.save(user);
+     /* var savedUser= repository.save(user);
       sendValidationEmail(savedUser);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
-    saveUserToken(savedUser, jwtToken);
+    saveUserToken(savedUser, jwtToken);*/
 
     return AuthenticationResponse.builder()
             .secretImageUri(tfaService.generateQrCodeImageUri(user.getSecret()))
-           .accessToken(jwtToken)
+           /*.accessToken(jwtToken)
             .refreshToken(refreshToken)
-            .mfaEnabled(user.isMfaEnabled())
+            .mfaEnabled(user.isMfaEnabled())*/
             .build();
   }
 
-    private void sendValidationEmail(User user) throws MessagingException {
+    /*private void sendValidationEmail(User user) throws MessagingException {
       var newToken= generateAndSaveActivationToken(user);
 
         emailService.sendEmail(user.getEmail(), user.getfullNname(), EmailTemplateName.ACTIVATE_ACCOUNT,activationUrl,newToken,"Account activation");
@@ -221,5 +221,5 @@ if(user.isMfaEnabled()){
 
         savedToken.setValidatedAt(LocalDateTime.now());
         emailtokenRepository.save(savedToken);
-    }
+    }*/
 }

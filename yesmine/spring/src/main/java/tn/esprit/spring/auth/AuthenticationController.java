@@ -28,7 +28,7 @@ public class AuthenticationController {
     }
     return ResponseEntity.accepted().build();
   }
-  @PostMapping("/authenticate")
+  /*@PostMapping("/authenticate")
   public ResponseEntity<AuthenticationResponse> authenticate(
       @RequestBody AuthenticationRequest request
   ) {
@@ -54,5 +54,5 @@ public class AuthenticationController {
           @RequestParam String emailtoken
   ) throws MessagingException {
     service.activateAccount(emailtoken);
-  }
+  }*/
 }

@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import tn.esprit.spring.entities.ChangePasswordRequest;
+import tn.esprit.spring.entities.User2;
 import tn.esprit.spring.entities.User;
 
 import java.security.Principal;
@@ -8,15 +9,15 @@ import java.util.List;
 
 public interface IUserServices {
 
-    User addUser(User user);
+    User2 addUser2(User2 User2);
 
-    List<User> retrieveAllUsers();
+    List<User2> retrieveAllUser2s();
 
-    User updateUser(User user);
+    User2 updateUser2(User2 User2);
 
-    User retrieveUser(Long IdUser);
-    void removeUser (Long IdUser);
-    void changePassword(ChangePasswordRequest request, Principal connectedUser);
-    //User addInstructorAndAssignToCourse(User instructor, Long numCourse);
+    User2 retrieveUser2(Long IdUser2);
+    void removeUser2 (Long IdUser2);
+    void changePassword(ChangePasswordRequest request, Principal connectedUser2);
+    //User2 addInstructorAndAssignToCourse(User2 instructor, Long numCourse);
 
 }
