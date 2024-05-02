@@ -1,0 +1,77 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { FrontAllComponent } from './front-office/front-all/front-all.component';
+import { BackAllComponent } from './BackOffice/back-all/back-all.component';
+import { ProjetDetailComponent } from './BackOffice/back-all/content-back/projectManagement/projet-dtail/projet-dtail.component';
+import { CommonModule } from '@angular/common';
+import { ListdesreclamationComponent } from './BackOffice/back-all/Reclamation/listdesreclamation/listdesreclamation.component';
+import { AjouterreclamationComponent } from './BackOffice/back-all/Reclamation/ajouterreclamation/ajouterreclamation.component';
+import { ModifierreclamationComponent } from './BackOffice/back-all/Reclamation/modifierreclamation/modifierreclamation.component';
+import { ReponseReclamationComponent } from './BackOffice/back-all/Reclamation/reponse-reclamation/reponse-reclamation.component';
+import { ReclamationComponent } from './front-office/front-all/reclamation/reclamation.component';
+import { ListReponseComponent } from './BackOffice/back-all/Reclamation/list-reponse/list-reponse.component';
+import { ListCategoryComponent } from './BackOffice/back-all/Category/list-category/list-category.component';
+import { ListRessouceComponent } from './BackOffice/back-all/Ressource/list-ressouce/list-ressouce.component';
+import { AjoutRessouceComponent } from './BackOffice/back-all/Ressource/ajout-ressouce/ajout-ressouce.component';
+import { ModifyRessourceComponent } from './BackOffice/back-all/Ressource/modify-ressource/modify-ressource.component';
+import { CatgorieFrontComponent } from './front-office/front-all/catgorie-front/catgorie-front.component';
+import { RessourcesFrontComponent } from './front-office/front-all/ressources-front/ressources-front.component';
+import { HomeComponent } from './front-office/front-all/home/home.component';
+import {authGuard} from "./front-office/front-all/serives/auth/auth.guard";
+import {ActivateAccountComponent} from "./front-office/front-all/activate-account/activate-account.component";
+import {LoginComponent} from "./front-office/front-all/login/login.component";
+import {RegisterComponent} from "./front-office/front-all/register/register.component";
+const routes: Routes = [
+
+{ path: '', component:FrontAllComponent,children:[
+    {
+      path: 'login',
+      component: LoginComponent
+    },
+    {
+      path: 'register',
+      component: RegisterComponent
+    },
+    {
+      path: 'activate-account',
+      component: ActivateAccountComponent
+    },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent  },
+  { path: 'reclamationfront', component: ReclamationComponent  },
+  {path:'categoriFront', component:CatgorieFrontComponent},
+  {path:'ressources/:id', component:RessourcesFrontComponent},
+
+    ]},
+{ path: "admin", component:BackAllComponent,children:[
+  //project paths
+  { path: 'reclamation', component: ListdesreclamationComponent  },
+  { path: 'listreponse', component: ListReponseComponent  },
+  { path: 'ajoutereclamaton', component: AjouterreclamationComponent  },
+  {path:'reponse/:id',component:ReponseReclamationComponent},
+  {path:'modifierreclamation/:id',component:ModifierreclamationComponent},
+
+  {path:'listCategory',component:ListCategoryComponent},
+  {path:'listRessource',component:ListRessouceComponent},
+  {path:'ajoutRessource',component:AjoutRessouceComponent},
+  { path: 'modifyRessource/:id', component: ModifyRessourceComponent }
+
+  ]
+},
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+@NgModule({
+  declarations: [
+    ProjetDetailComponent
+  ],
+  imports: [
+    CommonModule,
+  ]
+})
+export class VotreModule { }
