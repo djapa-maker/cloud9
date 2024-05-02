@@ -1,0 +1,72 @@
+
+
+<h2>Ajouter une Reclamation :</h2>
+
+      <div class="">
+        <form class="row g-3" (ngSubmit)="addReclamation()" [formGroup]="BlocForm" >
+
+          <div class="col-md-6">
+            <label for="inputCategorie" class="form-label">Catégorie :</label>
+            <select class="form-control" formControlName="categorie">
+              <option value="FONCTIONNALITES_MANQUANTES">Fonctionnalités manquantes</option>
+              <option value="PROBLEMES_TECHNIQUES">Problèmes techniques</option>
+              <option value="SECURITE">Sécurité</option>
+              <option value="ASSISTANCE_ET_SUPPORT">Assistance et support</option>
+              <option value="PERFORMANCES">Performances</option>
+            </select>
+            <div *ngIf="validateField('categorie')" class="error-message">
+                {{ getErrorMessage('categorie') }}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputTitle" class="form-label">Name :</label>
+            <input type="text" class="form-control" formControlName="name">
+            <div *ngIf="validateField('name')" class="error-message">
+                {{ getErrorMessage('name') }}
+              </div>
+                     </div>
+
+                     <div class="col-md-6">
+                        <label for="inputTitle" class="form-label">Date Soumission :</label>
+                        <input type="date" class="form-control" formControlName="dateSoumission">
+                        <div *ngIf="validateField('dateSoumission')" class="error-message">
+                            {{ getErrorMessage('dateSoumission') }}
+                        </div>
+                    </div>
+                    
+
+          <div class="col-md-6">
+            <label for="inputDescription" class="form-label">Description:</label>
+            <textarea class="form-control" rows="3" formControlName="descriptionReclamation"></textarea>
+
+            <div *ngIf="validateField('descriptionReclamation')" class="error-message">
+                {{ getErrorMessage('descriptionReclamation') }}
+              </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="inputAssignedTo" class="form-label">User:</label>
+                        <select class="form-select" formControlName="user">
+                          <option *ngFor="let user of users" [value]="user.id">{{ user.firstName }}</option>
+                        </select>
+                        <div *ngIf="validateField('user')" class="error-message">
+                          {{ getErrorMessage('user') }}
+                        </div>
+                      </div>
+         
+                   
+          
+                  
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+          </div>
+        </form><!-- End Multi Columns Form -->
+  
+
+      </div>
+
+
+    
+  
