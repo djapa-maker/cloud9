@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AjoutRessouceComponent {
   BlocForm: FormGroup;
-  ressources: Ressource[] = []; 
+  ressources: Ressource[] = [];
   catgories: Category[] = [];
   formSubmitted = false;
   @ViewChild('fileInput') fileInput: ElementRef;
@@ -33,7 +33,7 @@ export class AjoutRessouceComponent {
         Validators.required,
         Validators.minLength(4),
       ]),
-      url: new FormControl('', [ 
+      url: new FormControl('', [
         Validators.required,
       ]),
       category: new FormControl('', [
@@ -42,18 +42,18 @@ export class AjoutRessouceComponent {
     };
     this.BlocForm = this.fb.group(formControls);
   }
-  
+
   ngOnInit(): void {
     this.serviceCategory.getAllCategories().subscribe(
       (catgories: any) => {
         this.catgories = catgories;
-        console.log(catgories); 
+        console.log(catgories);
       },
       (error) => {
         console.error(error);
       }
     );
-    
+
   }
 
   get titleR() { return this.BlocForm.get('titleR'); }
@@ -86,7 +86,7 @@ export class AjoutRessouceComponent {
     if (this.BlocForm.invalid) {
       return;
     }
-  
+
     const data = this.BlocForm.value;
     const newRessource = new Ressource(
       undefined,
@@ -96,14 +96,14 @@ export class AjoutRessouceComponent {
       new Date(),
       this.catgories.find(category => category.idC == data.category)
     );
-  
-    const fileToUpload = fileInput.files?.[0]; 
-  
+
+    const fileToUpload = fileInput.files?.[0];
+
     if (!fileToUpload) {
       console.error("Aucun fichier sélectionné.");
       return;
     }
-  
+    alert("SUCCESS\n\n"+JSON.stringify(this.BlocForm.value,null,4));
     this.service.createResourceAndAssociateCategory(newRessource, newRessource.category.idC, fileToUpload).subscribe(
       res => {
         console.log(res);
@@ -118,6 +118,6 @@ export class AjoutRessouceComponent {
       }
     );
   }
-  
-  
+
+
 }

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../../model/User";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
+import {Ressource} from "../../model/Ressource";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Access-Control-Allow-Origin': 'http://localhost:4200'})
@@ -15,6 +16,7 @@ export class UserService {
   private listurl ='http://localhost:8085/mindCare/api/v1/Users/all';
   private modifierurl = 'http://localhost:8085/mindCare/api/v1/Users/update';
   private deleteUrl='http://localhost:8085/mindCare/api/v1/Users/delete';
+  private searchUrl ='http://localhost:8085/mindCare/api/v1/Users';
   constructor(private http: HttpClient) { }
 
 
@@ -101,11 +103,17 @@ console.log(httpOptions);
 
 
 
-/*
-  searchusers(keyword: string): Observable<user[]> {
-    const url = `${this.Url}/searchuser?keyword=${keyword}`;
-    return this.http.get<user[]>(url);
-  }*/
+
+  searchusers(keyword: string): Observable<User[]> {
+    const url = `${this.searchUrl}/searchUser?keyword=${keyword}`;
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<User[]>(url, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
+  }
 
 
 }

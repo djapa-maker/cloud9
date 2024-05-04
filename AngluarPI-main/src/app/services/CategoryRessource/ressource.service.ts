@@ -33,6 +33,21 @@ export class RessourceService {
           return throwError('Erreur lors de l\'ajout de la ressource');
         })
       );
+
+
+    /*const formData: FormData = new FormData();
+    formData.append('titleR', ressource.titleR);
+    formData.append('descriptionR', ressource.descriptionR);
+    formData.append('file', ressource.url);
+
+    const httpOptions = this.getHttpOptions();
+
+    return this.http.post<void>(`${this.baseUrl}/createResourceAndAssociateCategory/${categoryId}`, ressource, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de la ressource');
+        })
+      );*/
   }
   private getToken(): string | null {
     return localStorage.getItem('token');

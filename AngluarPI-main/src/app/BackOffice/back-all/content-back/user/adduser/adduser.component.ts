@@ -35,6 +35,7 @@ export class AdduserComponent {
       ]),
       password: new FormControl('', [
         Validators.required,
+        this.passwordValidator,
       ]),
       role: new FormControl('', [
         Validators.required,
@@ -42,6 +43,18 @@ export class AdduserComponent {
     };
     this.BlocForm = this.fb.group(formControls);
   }
+  passwordValidator(control: FormControl): { [key: string]: boolean } | null {
+    if (!control.value) {
+      return null; // Si le champ est vide, aucune validation nécessaire
+    }
+
+    // Expression régulière pour valider le mot de passe
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+    // Vérification si le mot de passe correspond à l'expression régulière
+    return regex.test(control.value) ? null : { invalidPassword: true };
+  }
+
   ngOnInit(): void {
 
 
@@ -70,6 +83,9 @@ export class AdduserComponent {
     }
     if (this.BlocForm.get(field)?.hasError('minlength')) {
       return 'Ce champ doit contenir au moins 4 caractères';
+    }
+    if (this.BlocForm.get(field)?.hasError('invalidPassword')) {
+      return 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et avoir une longueur d\'au moins 8 caractères';
     }
     return '';
   }

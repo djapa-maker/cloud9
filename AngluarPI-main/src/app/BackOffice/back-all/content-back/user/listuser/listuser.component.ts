@@ -51,10 +51,10 @@ export class ListuserComponent {
 
 
   searchUsers(): void {
-    /*if (this.searchKeyword.trim() !== '') {
-      this.service.searchReclamations(this.searchKeyword).subscribe(
+    if (this.searchKeyword.trim() !== '') {
+      this.service.searchusers(this.searchKeyword).subscribe(
         data => {
-          this.reclamations = data;
+          this.users = data;
           console.log('Search results:', data);
         },
         error => {
@@ -63,7 +63,7 @@ export class ListuserComponent {
       );
     } else {
       this.ngOnInit();
-    }*/
+    }
   }
 
  /* searchReclamations(): void {

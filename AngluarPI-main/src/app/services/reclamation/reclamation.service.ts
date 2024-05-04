@@ -43,8 +43,9 @@ export class ReclamationService {
   }
 
    ajouterreclamation(reclamation: Reclamation): Observable<Reclamation> {
+     const url1 = `${this.ajouterurl}`;
     const httpOptions = this.getHttpOptions();
-     return this.http.post<Reclamation>(this.ajouterurl, reclamation, httpOptions)
+     return this.http.post<Reclamation>(url1, reclamation, httpOptions)
        .pipe(
          catchError((error: any) => {
            return throwError('Erreur lors de l\'ajout de la reclamation');

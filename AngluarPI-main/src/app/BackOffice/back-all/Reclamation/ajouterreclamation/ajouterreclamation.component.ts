@@ -13,7 +13,7 @@ import { User } from 'src/app/model/User';
 })
 export class AjouterreclamationComponent {
   BlocForm: FormGroup;
-  reclamations: Reclamation[] = []; 
+  reclamations: Reclamation[] = [];
   users: User[] = [];
 
   formSubmitted = false;
@@ -32,7 +32,7 @@ export class AjouterreclamationComponent {
         Validators.required,
         Validators.minLength(4),
       ]),
-      descriptionReclamation: new FormControl('', [ 
+      descriptionReclamation: new FormControl('', [
         Validators.required,
       ]),
       categorie: new FormControl('', [
@@ -51,13 +51,13 @@ export class AjouterreclamationComponent {
     this.service.getUsers().subscribe(
       (users: any) => {
         this.users = users;
-        console.log(users); 
+        console.log(users);
       },
       (error) => {
         console.error(error);
       }
     );
-    
+
   }
 
   get name() { return this.BlocForm.get('name'); }
@@ -68,7 +68,7 @@ export class AjouterreclamationComponent {
 
 
 
- 
+
 
 
   validateField(field: string) {
@@ -106,13 +106,13 @@ console.log ("Selected User : ",Selecteduser);
       Selecteduser,
       data.status
     );
-    
+
     console.log('Reclamation:', newReclamation);
     this.service.ajouterreclamation(newReclamation).subscribe(
       res => {
         console.log(res);
         console.log('add succfuly ', res)
-        this.router.navigate(['admin/reclamation']); 
+        this.router.navigate(['admin/reclamation']);
       },
       err => {
         console.error('Erreur lors de l\'ajout de la réclamation :', err);
@@ -120,7 +120,7 @@ console.log ("Selected User : ",Selecteduser);
           console.error('Error:', err.error);
         }
       }
-      
+
     );
   }
 }
