@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserService {
     List<User> retrieveAllUsers();
     User retrieveUserbyemail(String email);
+    User retrieveUser(Long IdUser);
 }

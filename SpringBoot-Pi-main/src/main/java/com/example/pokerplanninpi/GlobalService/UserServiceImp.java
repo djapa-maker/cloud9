@@ -15,6 +15,10 @@ public class UserServiceImp implements UserService {
     public UserServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    @Override
+    public User retrieveUser(Long IdUser) {
+        return userRepository.findById(IdUser).orElse(null);
+    }
 
     @Override
     public List<User> retrieveAllUsers() {

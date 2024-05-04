@@ -3,6 +3,7 @@ package com.example.pokerplanninpi.Controller;
 import com.example.pokerplanninpi.GlobalService.IUserServices;
 import com.example.pokerplanninpi.GlobalService.UserService;
 import com.example.pokerplanninpi.entity.ChangePasswordRequest;
+import com.example.pokerplanninpi.entity.Reclamation;
 import com.example.pokerplanninpi.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //@Tag(name = "\uD83D\uDC69\u200D\uD83C\uDFEB User Management")
 @RestController
@@ -38,8 +40,16 @@ public class UserRestController {
 
     return  UserServices.addUser(User);
     }
-    
 
+    @GetMapping("/searchUser")
+    List<User> searchUser(@RequestParam(value = "keyword") String keyword) {
+        List<User> allReclamations = userService.retrieveAllUsers();
+        return allReclamations.stream()
+                .filter(story ->
+                        story.getFirstname().toLowerCase().contains(keyword.toLowerCase()) ||
+                                story.getLastname().toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 //    @Operation(description = "Retrieve all Users")
     @GetMapping("/all")
     public List<User> getAllUsers(){

@@ -22,17 +22,14 @@ import java.util.stream.Collectors;
 public class ControllerRessource {
     @Autowired
     RessourceServiceImpl ressourceService;
-    /*
-    @PostMapping("/addressource")
-    public Ressource addRessource(@RequestBody Ressource ressource) {
-        return ressourceService.addRessource(ressource);
-    }
+    /* @PostMapping("/createResourceAndAssociateCategory/{category-id}")
+   public void createResourceAndAssociateCategory(@RequestBody Ressource ressource,
+                                                  @PathVariable("category-id") Long categoryId) {
 
- */
 
-    /*@PutMapping("/createResourceAndAssociateCategory/{category-id}")
-    public void createResourceAndAssociateCategory(@RequestBody Ressource ressource,@PathVariable("category-id") Long categoryId) {
-    ressourceService.createResourceAndAssociateCategory(ressource,categoryId);}*/
+       ressourceService.createResourceAndAssociateCategory(ressource, categoryId);
+}*/
+
     @PutMapping("/createResourceAndAssociateCategory/{category-id}")
     public void createResourceAndAssociateCategory(@RequestParam("titleR") String titleR,
                                                    @RequestParam("descriptionR") String descriptionR,
