@@ -12,6 +12,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import javax.mail.MessagingException;
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,30 +26,29 @@ public class EmailService {
     @Autowired
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
-
     /*@Async
-    public void sendEmail(
-            String to,
-            String subject,
-            String activationCode
-    ) throws MessagingException, jakarta.mail.MessagingException {
-        String templateName;
-        if (emailTemplate == null) {
-            templateName = "confirm-email";
-        } else {
-            templateName = emailTemplate.name();
-        }
-        MimeMessage mimeMessage=mailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage,true);
+        public void sendEmail(
+                String to,
+                String subject,
+                String activationCode
+        ) throws MessagingException {
+            String templateName;
+            if (emailTemplate == null) {
+                templateName = "confirm-email";
+            } else {
+                templateName = emailTemplate.name();
+            }
+            MimeMessage mimeMessage=mailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage,true);
 
-        mimeMessageHelper.setFrom("yesmineguesmi@gmail.com");
-        mimeMessageHelper.setTo(to);
-        mimeMessageHelper.setText(subject);
-        mimeMessageHelper.setSubject(activationCode);
+            mimeMessageHelper.setFrom("yesmineguesmi@gmail.com");
+            mimeMessageHelper.setTo(to);
+            mimeMessageHelper.setText(subject);
+            mimeMessageHelper.setSubject(activationCode);
 
-        mailSender.send(mimeMessage);
-        System.out.println("mail sent");
-    }*/
+            mailSender.send(mimeMessage);
+            System.out.println("mail sent");
+        }*/
     @Async
     public void sendEmail(
             String to,
@@ -58,6 +58,7 @@ public class EmailService {
             String activationCode,
             String subject
     ) throws MessagingException, jakarta.mail.MessagingException {
+
         String templateName;
         if (emailTemplate == null) {
             templateName = "confirm-email";
@@ -85,7 +86,7 @@ public class EmailService {
         String template = templateEngine.process(templateName, context);
 
         helper.setText(template, true);
-System.out.println("mail sent");
+        System.out.println("mail sent");
         mailSender.send(mimeMessage);
     }
 }

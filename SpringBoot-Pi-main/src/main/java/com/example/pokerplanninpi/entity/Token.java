@@ -1,5 +1,6 @@
 package com.example.pokerplanninpi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,8 +29,18 @@ public class Token {
   public boolean revoked;
 
   public boolean expired;
-
+  @Override
+  public String toString() {
+    return "Token{" +
+            "id=" + id +
+            ", token='" + token + '\'' +
+            ", tokenType=" + tokenType +
+            ", revoked=" + revoked +
+            ", expired=" + expired +
+            '}';
+  }
   @ManyToOne//(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
+  @JsonIgnore
   public User user;
 }

@@ -9,10 +9,10 @@ import java.util.List;
 public interface IUserServices {
 
     User addUser(User User);
-
+    User retrieveUserbyemail(String email);
     List<User> retrieveAllUsers();
 
-    User updateUser(User User);
+    User updateUser(User User,Long IdUser);
 
     User retrieveUser(Long IdUser);
     void removeUser (Long IdUser);

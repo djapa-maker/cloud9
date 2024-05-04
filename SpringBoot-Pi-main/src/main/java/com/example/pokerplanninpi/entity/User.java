@@ -43,6 +43,7 @@ public class User implements UserDetails {
     private boolean mfaEnabled;
     private String secret;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     List<Token> tokens;
     @OneToMany(mappedBy = "user")
     @JsonIgnore

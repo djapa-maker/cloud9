@@ -1,11 +1,13 @@
 package com.example.pokerplanninpi.Controller;
 
 import com.example.pokerplanninpi.GlobalService.IUserServices;
+import com.example.pokerplanninpi.GlobalService.UserService;
 import com.example.pokerplanninpi.entity.ChangePasswordRequest;
 import com.example.pokerplanninpi.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -16,30 +18,38 @@ import java.util.List;
 @RequestMapping("/api/v1/Users")
 @RequiredArgsConstructor
 public class UserRestController {
-
+    private final UserService userService;
     private final IUserServices UserServices;
+    private final PasswordEncoder passwordEncoder;
     @GetMapping("/show")
     public ResponseEntity<String> sayHello() {
         return ResponseEntity.ok("Hello from secured endpoint");
+    }
+    @Operation(description = "Retrieve User by email")
+    @GetMapping("/getbyemaill/{email}")
+    public User getbyemaill(@PathVariable("email") String email){
+        return userService.retrieveUserbyemail(email);
     }
 
     @Operation(description = "Add User")
     @PostMapping("/add")
     public User addUser(@RequestBody User User){
-        return  UserServices.addUser(User);
+     User.setPassword(passwordEncoder.encode(User.getPassword()));
+
+    return  UserServices.addUser(User);
     }
     
 
-    @Operation(description = "Retrieve all Users")
+//    @Operation(description = "Retrieve all Users")
     @GetMapping("/all")
     public List<User> getAllUsers(){
         return UserServices.retrieveAllUsers();
     }
 
     @Operation(description = "Update User ")
-    @PutMapping("/update")
-    public User updateUser(@RequestBody User User){
-        return  UserServices.updateUser(User);
+    @PutMapping("/update/{id-User}")
+    public User updateUser(@RequestBody User User,@PathVariable("id-User") Long numUser){
+        return  UserServices.updateUser(User,numUser);
     }
 
     @Operation(description = "Retrieve User by Id")
@@ -47,6 +57,12 @@ public class UserRestController {
     public User getById(@PathVariable("id-User") Long numUser){
         return UserServices.retrieveUser(numUser);
     }
+    @Operation(description = "Retrieve User by email")
+    @GetMapping("/getbyemail/{email}")
+    public User getbyemail(@PathVariable("email") String email){
+        return UserServices.retrieveUserbyemail(email);
+    }
+
     @Operation(description = "Delete User by Id")
     @DeleteMapping("/delete/{id-User}")
     public void deleteById(@PathVariable("id-User") Long numUser){

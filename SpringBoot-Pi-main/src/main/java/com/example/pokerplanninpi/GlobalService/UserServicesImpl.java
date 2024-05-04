@@ -5,6 +5,7 @@ import com.example.pokerplanninpi.entity.ChangePasswordRequest;
 import com.example.pokerplanninpi.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServicesImpl implements IUserServices {
-
+    @Autowired
     private IUserRepository UserRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -25,12 +27,17 @@ public class UserServicesImpl implements IUserServices {
     }
 
     @Override
+    public User retrieveUserbyemail(String email) {
+        return UserRepository.findByEmail(email);
+    }
+
+    @Override
     public List<User> retrieveAllUsers() {
         return UserRepository.findAll();
     }
 
     @Override
-    public User updateUser(User instructor) {
+    public User updateUser(User instructor,Long IdUser) {
         return UserRepository.save(instructor);
     }
 

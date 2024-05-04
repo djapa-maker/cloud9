@@ -49,7 +49,7 @@ public class AuthenticationService {
          .lastname(request.getLastname())
          .email(request.getEmail())
          .password(passwordEncoder.encode(request.getPassword()))
-         .role(Role.User)
+         .role(request.getRole())
          .mfaEnabled(request.isMfaEnabled())
          .build();
  //if mfa enabled--> generate secret
@@ -57,7 +57,7 @@ public class AuthenticationService {
           user.setSecret(tfaService.generateNewSecret());
       }
       var savedUser= repository.save(user);
-      sendValidationEmail(savedUser);
+      //sendValidationEmail(savedUser);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
     saveUserToken(savedUser, jwtToken);
@@ -118,7 +118,7 @@ public class AuthenticationService {
             request.getPassword()
         )
     );
-    var user = repository.findByEmail(request.getEmail()).orElseThrow(() -> new NoSuchElementException("No user with the provided email"));
+    var user = repository.findByEmaill(request.getEmail()).orElseThrow(() -> new NoSuchElementException("No user with the provided email"));
 
 if(user.isMfaEnabled()){
     return AuthenticationResponse.builder()
@@ -167,7 +167,7 @@ if(user.isMfaEnabled()){
     userEmail = jwtService.extractUsername(refreshToken);
     if (userEmail != null) {
 
-      var user = this.repository.findByEmail(userEmail)
+      var user = this.repository.findByEmaill(userEmail)
               .orElseThrow(() -> new NoSuchElementException("No user with the provided email"));
 
       if (jwtService.isTokenValid(refreshToken, user)) {
@@ -187,7 +187,7 @@ if(user.isMfaEnabled()){
             VerificationRequest verificationRequest
     ) {
         User user = repository
-                .findByEmail(verificationRequest.getEmail())
+                .findByEmaill(verificationRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("No user found with %S", verificationRequest.getEmail()))
                 );
