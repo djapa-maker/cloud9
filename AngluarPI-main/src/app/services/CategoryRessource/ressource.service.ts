@@ -13,7 +13,7 @@ const httpOptions = {
 
 export class RessourceService {
 
-  private baseUrl = 'http://localhost:8085/mindCare/ressource'; 
+  private baseUrl = 'http://localhost:8085/mindCare/ressource';
 
   constructor(private http: HttpClient) { }
 
@@ -26,70 +26,184 @@ export class RessourceService {
     formData.append('descriptionR', ressource.descriptionR);
     formData.append('file', file);
 
-    return this.http.put<void>(`${this.baseUrl}/createResourceAndAssociateCategory/${categoryId}`, formData);
+    const httpOptions = this.getHttpOptions();
+    return this.http.put<void>(`${this.baseUrl}/createResourceAndAssociateCategory/${categoryId}`, formData, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de la ressource');
+        })
+      );
   }
- 
-  
+  private getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+  private getHttpOptions(): { headers: HttpHeaders } {
+    const token = this.getToken();
+    console.log(token);
+    if (token) {
+      return {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        })
+      };
+    } else {
+      // Gérer le cas où le token n'existe pas
+      // Exemple : Rediriger l'utilisateur vers la page de connexion
+      throw new Error('Token not found');
+    }
+  }
+
 
   getRessourceById(id: number): Observable<Ressource> {
-    return this.http.get<Ressource>(`${this.baseUrl}/getressource/${id}`);
+
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<Ressource>(`${this.baseUrl}/getressource/${id}`, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   getAllRessources(): Observable<Ressource[]> {
-    return this.http.get<Ressource[]>(`${this.baseUrl}/getall`);
+
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<Ressource[]>(`${this.baseUrl}/getall`, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   deleteRessource(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
+
+    const httpOptions = this.getHttpOptions();
+    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   updateRessource(ressource: Ressource): Observable<Ressource> {
-    return this.http.put<Ressource>(`${this.baseUrl}/updateIdressources`, ressource);
+    const httpOptions = this.getHttpOptions();
+    return this.http.put<Ressource>(`${this.baseUrl}/updateIdressources`, ressource, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   unassignResourceFromCategory(id: number): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}/desaffecter-ressource/${id}`, {});
+    const httpOptions = this.getHttpOptions();
+    return this.http.put<void>(`${this.baseUrl}/desaffecter-ressource/${id}`, {}, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   findRessourcesByTitleR(titleR: string): Observable<Ressource[]> {
-    return this.http.get<Ressource[]>(`${this.baseUrl}/findRessourcesByTitleR/${titleR}`);
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<Ressource[]>(`${this.baseUrl}/findRessourcesByTitleR/${titleR}`, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   findRessourcesByCategoryId(id: number): Observable<Ressource[]> {
-    return this.http.get<Ressource[]>(`${this.baseUrl}/findRessourcesByCategoryId/${id}`);
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<Ressource[]>(`${this.baseUrl}/findRessourcesByCategoryId/${id}`, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   searchRessource(keyword: string): Observable<Ressource[]> {
     const url = `${this.baseUrl}/searchRessource?keyword=${keyword}`;
-    return this.http.get<Ressource[]>(url);
+
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<Ressource[]>(url, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
   getRessourceStatsByCategory(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/statsByCategory`);
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<any[]>(`${this.baseUrl}/statsByCategory`, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+        })
+      );
   }
 
 
 getResourcesByCategoryId(categoryId: number): Observable<Ressource[]> {
-  return this.http.get<Ressource[]>(`${this.baseUrl}/getResourcesByCategoryId/${categoryId}`);
-}
+  const httpOptions = this.getHttpOptions();
+  return this.http.get<Ressource[]>(`${this.baseUrl}/getResourcesByCategoryId/${categoryId}`, httpOptions)
+    .pipe(
+      catchError((error: any) => {
+        return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+      })
+    );
+  }
 
 
 likeRessource(idR: number): Observable<any> {
-  return this.http.post<any>(`${this.baseUrl}/ressources/${idR}/like`, {});
-}
+  const httpOptions = this.getHttpOptions();
+  return this.http.post<any>(`${this.baseUrl}/ressources/${idR}/like`, {}, httpOptions)
+    .pipe(
+      catchError((error: any) => {
+        return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+      })
+    );
+  }
 
 dislikeRessource(idR: number): Observable<any> {
-  return this.http.post<any>(`${this.baseUrl}/ressources/${idR}/dislike`, {});
-}
+  const httpOptions = this.getHttpOptions();
+  return this.http.post<any>(`${this.baseUrl}/ressources/${idR}/dislike`, {}, httpOptions)
+    .pipe(
+      catchError((error: any) => {
+        return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+      })
+    );
+  }
 
 loadUrl(idRessource: number): Observable<Blob> {
-  const headers = new HttpHeaders().set('Accept', 'application/avif');
-  return this.http.get(`${this.baseUrl}/loadurl/${idRessource}`, { headers,responseType: 'blob' });
-}
+  const headers = this.getHttpOptions().headers.set('Accept', 'application/avif');
+  //const headers = new HttpHeaders().set('Accept', 'application/avif');
+ // const httpOptions = this.getHttpOptions();
+  return this.http.get(`${this.baseUrl}/loadurl/${idRessource}`, { headers, responseType: 'blob' as const })
+    .pipe(
+      catchError((error: any) => {
+        return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+      })
+    );
+  }
 
 desaffecterRessource(ressourceId: number): Observable<any> {
   const url = `${this.baseUrl}/desaffecter-ressource/${ressourceId}`;
-  return this.http.put(url, null);
+
+  const httpOptions = this.getHttpOptions();
+  return this.http.put(url, null, httpOptions)
+    .pipe(
+      catchError((error: any) => {
+        return throwError('Erreur lors de l\'ajout de l\'utilisateur');
+      })
+    );
 }
 
 }

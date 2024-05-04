@@ -21,41 +21,49 @@ import {authGuard} from "./front-office/front-all/serives/auth/auth.guard";
 import {ActivateAccountComponent} from "./front-office/front-all/activate-account/activate-account.component";
 import {LoginComponent} from "./front-office/front-all/login/login.component";
 import {RegisterComponent} from "./front-office/front-all/register/register.component";
-const routes: Routes = [
+import {ListuserComponent} from "./BackOffice/back-all/content-back/user/listuser/listuser.component";
+import { AdduserComponent } from './BackOffice/back-all/content-back/user/adduser/adduser.component';
+import { UpdateuserComponent } from './BackOffice/back-all/content-back/user/updateuser/updateuser.component';
+import { DeleteuserComponent } from './BackOffice/back-all/content-back/user/deleteuser/deleteuser.component';
 
-{ path: '', component:FrontAllComponent,children:[
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
-      path: 'register',
-      component: RegisterComponent
-    },
-    {
-      path: 'activate-account',
-      component: ActivateAccountComponent
-    },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'activate-account',
+    component: ActivateAccountComponent
+  },
+{ path: '', component:FrontAllComponent, canActivate: [authGuard] ,children:[
+
   { path: 'home', component: HomeComponent  },
   { path: 'reclamationfront', component: ReclamationComponent  },
   {path:'categoriFront', component:CatgorieFrontComponent},
   {path:'ressources/:id', component:RessourcesFrontComponent},
 
     ]},
-{ path: "admin", component:BackAllComponent,children:[
+{ path: "admin", component:BackAllComponent, canActivate: [authGuard] ,children:[
   //project paths
   { path: 'reclamation', component: ListdesreclamationComponent  },
   { path: 'listreponse', component: ListReponseComponent  },
   { path: 'ajoutereclamaton', component: AjouterreclamationComponent  },
   {path:'reponse/:id',component:ReponseReclamationComponent},
   {path:'modifierreclamation/:id',component:ModifierreclamationComponent},
+    { path: 'user', component: ListuserComponent  },
 
   {path:'listCategory',component:ListCategoryComponent},
   {path:'listRessource',component:ListRessouceComponent},
   {path:'ajoutRessource',component:AjoutRessouceComponent},
-  { path: 'modifyRessource/:id', component: ModifyRessourceComponent }
-
+  { path: 'modifyRessource/:id', component: ModifyRessourceComponent },
+    { path: 'adduser', component: AdduserComponent  },
+    { path: 'updateuser/:id', component: UpdateuserComponent  },
+    { path: 'deleteuser', component: DeleteuserComponent  }
   ]
 },
 

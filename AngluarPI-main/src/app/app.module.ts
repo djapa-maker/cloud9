@@ -42,7 +42,10 @@ import { ModifyRessourceComponent } from './BackOffice/back-all/Ressource/modify
 import { CatgorieFrontComponent } from './front-office/front-all/catgorie-front/catgorie-front.component';
 import { RessourcesFrontComponent } from './front-office/front-all/ressources-front/ressources-front.component';
 import { HomeComponent } from './front-office/front-all/home/home.component';
-
+import { AdduserComponent } from './BackOffice/back-all/content-back/user/adduser/adduser.component';
+import { UpdateuserComponent } from './BackOffice/back-all/content-back/user/updateuser/updateuser.component';
+import { DeleteuserComponent } from './BackOffice/back-all/content-back/user/deleteuser/deleteuser.component';
+import { ListuserComponent } from './BackOffice/back-all/content-back/user/listuser/listuser.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +81,10 @@ import { HomeComponent } from './front-office/front-all/home/home.component';
     CatgorieFrontComponent,
     RessourcesFrontComponent,
     HomeComponent,
-
+    AdduserComponent,
+    UpdateuserComponent,
+    DeleteuserComponent,
+    ListuserComponent,
 
   ],
   imports: [
