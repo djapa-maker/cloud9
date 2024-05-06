@@ -23,6 +23,16 @@ export class UserService {
   private getToken(): string | null {
     return localStorage.getItem('token');
   }
+  getuserID(email: string): Observable<number> {
+    const httpOptions = this.getHttpOptions();
+    console.log("id: "+ this.http.get<number>(`http://localhost:8085/mindCare/api/v1/Users/getidbyemail/${email}`));
+    return this.http.get<number>(`http://localhost:8085/mindCare/api/v1/Users/getidbyemail/${email}`, httpOptions)
+      .pipe(
+        catchError((error: any) => {
+          return throwError('Erreur lors de la récupération des détails de l\'utilisateur');
+        })
+      );
+  }
   private getHttpOptions(): { headers: HttpHeaders } {
     const token = this.getToken();
     console.log(token);
@@ -51,7 +61,7 @@ export class UserService {
 
   listuser(): Observable<User[]> {
     const httpOptions = this.getHttpOptions();
-console.log(httpOptions);
+    console.log(httpOptions);
     return this.http.get<User[]>(this.listurl, httpOptions)
       .pipe(
         catchError((error: any) => {
@@ -82,7 +92,7 @@ console.log(httpOptions);
   }
   getUserDetails(email: string) {
     const httpOptions = this.getHttpOptions();
-    return this.http.get(`http://localhost:8085/mindCare/api/v1/Users/getbyemail/${email}`, httpOptions)
+    return this.http.get<User>(`http://localhost:8085/mindCare/api/v1/Users/getbyemail/${email}`, httpOptions)
       .pipe(
         catchError((error: any) => {
           return throwError('Erreur lors de la récupération des détails de l\'utilisateur');

@@ -28,10 +28,16 @@ export class LoginComponent {
       .subscribe({
         next: (response) => {
           this.authResponse = response;
-          if (!this.authResponse.mfaEnabled) {
-            localStorage.setItem('token', response.accessToken as string);
+          if (!this.authResponse.mfaEnabled ) {
 
-            this.fetchUserDetailsAndNavigate();
+            localStorage.setItem('token', response.accessToken as string);
+            this.userService.getuserID(this.authRequest.email).subscribe((id: number) => {
+              // Convert ID to string before storing it in local storage
+              localStorage.setItem('userID', id.toString());
+              this.fetchUserDetailsAndNavigate();
+            }, (error) => {
+              console.error('Error getting user ID:', error);
+            });
           }
         },
         error:(err)=>{

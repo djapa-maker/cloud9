@@ -39,8 +39,8 @@
 
 
         <div class="col-md-12">
-          <label for="password" class="form-label" >password :</label>
-          <input type="text" class="form-control" formControlName="password">
+          <label style="display: none;" for="password" class="form-label" >password :</label>
+          <input style="display: none;" type="text" class="form-control" formControlName="password">
           <div *ngIf="validateField('password')" class="error-message">
             {{ getErrorMessage('password') }}
           </div>

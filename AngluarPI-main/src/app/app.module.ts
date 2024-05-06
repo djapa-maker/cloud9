@@ -51,6 +51,7 @@ import { CreateEventComponent } from './BackOffice/back-all/content-back/events/
 import { UpdateEventComponent } from './BackOffice/back-all/content-back/events/update-event/update-event.component';
 import { TicketForEventComponent } from './front-office/front-all/ticket-for-event/ticket-for-event.component';
 import { CreateTicketComponent } from './front-office/front-all/create-ticket/create-ticket.component';
+import { ProfileComponent } from './front-office/front-all/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,6 +96,7 @@ import { CreateTicketComponent } from './front-office/front-all/create-ticket/cr
     UpdateEventComponent,
     TicketForEventComponent,
     CreateTicketComponent,
+    ProfileComponent,
 
   ],
   imports: [

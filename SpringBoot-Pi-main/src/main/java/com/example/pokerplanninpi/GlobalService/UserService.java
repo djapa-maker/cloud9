@@ -8,4 +8,5 @@ public interface UserService {
     List<User> retrieveAllUsers();
     User retrieveUserbyemail(String email);
     User retrieveUser(Long IdUser);
+    Long retrieveidbyemail(String email);
 }

@@ -35,6 +35,31 @@
                   <li class="nav-item">
                     <a class="nav-link click-scroll" routerLink="/tickets"  style="color: black;">Event</a>
                   </li>
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                  <a  href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div >
+                      <img src="/assets/BackOffice/assets/img/avatars/1.png" alt style="width: 60px; height: 60px;" class="rounded-circle" />
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+
+                    <li>
+                      <a class="dropdown-item" routerLink="/profile">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">My Profile</span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a (click)="logout()" class="dropdown-item" >
+                        <i class="bx bx-power-off me-2"></i>
+                        <span class="align-middle">Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
               </ul>
 
 <!--              <a  class="btn custom-btn d-lg-block d-none">Sign In</a>-->

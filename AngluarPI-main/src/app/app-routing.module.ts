@@ -30,6 +30,7 @@ import { CreateEventComponent } from './BackOffice/back-all/content-back/events/
 import { UpdateEventComponent } from './BackOffice/back-all/content-back/events/update-event/update-event.component';
 import { TicketForEventComponent } from './front-office/front-all/ticket-for-event/ticket-for-event.component';
 import { CreateTicketComponent } from './front-office/front-all/create-ticket/create-ticket.component';
+import {ProfileComponent} from "./front-office/front-all/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
 { path: '', component:FrontAllComponent, canActivate: [authGuard] ,children:[
 
   { path: 'home', component: HomeComponent  },
+    { path: 'profile', component: ProfileComponent  },
   { path: 'reclamationfront', component: ReclamationComponent  },
   {path:'categoriFront', component:CatgorieFrontComponent},
   {path:'ressources/:id', component:RessourcesFrontComponent},

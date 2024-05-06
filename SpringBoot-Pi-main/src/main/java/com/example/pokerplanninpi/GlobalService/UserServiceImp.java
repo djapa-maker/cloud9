@@ -21,6 +21,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public Long retrieveidbyemail(String email) {
+        return userRepository.findidByEmail(email);
+    }
+
+    @Override
     public List<User> retrieveAllUsers() {
         return userRepository.findAll();    }
     @Override
