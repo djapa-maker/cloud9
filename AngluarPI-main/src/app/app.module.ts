@@ -57,6 +57,10 @@ import { AddPostComponent } from './BackOffice/back-all/Post/add-post/add-post.c
 import { ModifyPostComponent } from './BackOffice/back-all/Post/modify-post/modify-post.component';
 import { PostsFrontComponent } from './front-office/front-all/Post/posts-front/posts-front.component';
 import { PostsDetailComponent } from './front-office/front-all/Post/posts-detail/posts-detail.component';
+import { CategoryComponent } from './BackOffice/back-all/exercise/category/category.component';
+import { ExerciseCategoryComponent } from './BackOffice/back-all/exercise/exercise-category/exercise-category.component';
+import { ExerciseComponent } from './front-office/front-all/execise-front/exercise/exercise.component';
+import { ExercisedetailsComponent } from './front-office/front-all/execise-front/exercisedetails/exercisedetails.component';
 
 
 
@@ -110,6 +114,10 @@ import { PostsDetailComponent } from './front-office/front-all/Post/posts-detail
     ModifyPostComponent,
     PostsFrontComponent,
     PostsDetailComponent,
+    CategoryComponent,
+    ExerciseCategoryComponent,
+    ExerciseComponent,
+    ExercisedetailsComponent,
 
   ],
   imports: [

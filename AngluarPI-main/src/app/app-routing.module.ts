@@ -37,6 +37,11 @@ import { ListePostComponent } from './BackOffice/back-all/Post/list-post/list-po
 import { AddPostComponent } from './BackOffice/back-all/Post/add-post/add-post.component';
 import { ModifyPostComponent } from './BackOffice/back-all/Post/modify-post/modify-post.component';
 
+import { CategoryComponent } from './BackOffice/back-all/exercise/category/category.component';
+import { ExerciseCategoryComponent } from './BackOffice/back-all/exercise/exercise-category/exercise-category.component';
+import { ExerciseComponent } from './front-office/front-all/execise-front/exercise/exercise.component';
+import { ExercisedetailsComponent } from './front-office/front-all/execise-front/exercisedetails/exercisedetails.component';
+
 const routes: Routes = [
   {
     path: 'login',
@@ -58,6 +63,9 @@ const routes: Routes = [
   { path: 'reclamationfront', component: ReclamationComponent  },
   {path:'categoriFront', component:CatgorieFrontComponent},
   {path:'ressources/:id', component:RessourcesFrontComponent},
+  
+  {path:'exercisefront', component:ExerciseComponent},
+  {path:'exercisedetails/:id', component:ExercisedetailsComponent},
   {path:'tickets', component:TicketForEventComponent},
   {path:'create-ticket/:id', component:CreateTicketComponent},
   { path: 'posts-front', component: PostsFrontComponent  },
@@ -82,6 +90,11 @@ const routes: Routes = [
     { path: 'adduser', component: AdduserComponent  },
     { path: 'updateuser/:id', component: UpdateuserComponent  },
     { path: 'deleteuser', component: DeleteuserComponent  },
+    { path: 'categoryexercise', component: CategoryComponent } // New route for adding category
+    ,    { path: 'exerciseback', component: ExerciseCategoryComponent }, // New route for adding category
+
+
+
     { path: 'events', component: EventListComponent  },
     {path: 'create-event', component: CreateEventComponent},
     {path: 'update-event/:id', component: UpdateEventComponent},

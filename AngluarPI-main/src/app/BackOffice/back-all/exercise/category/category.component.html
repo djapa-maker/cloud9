@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="card-body">
+      <header>
+        <h2>Categories List</h2>
+      </header>
+  
+      <section>
+        <button class="btn btn-primary ml-1" (click)="toggleAddForm()">
+          <i class="mr-1"></i>Add a Category
+        </button>
+  
+        <div *ngIf="showAddForm" class="mt-3 card">
+          <div class="card-body">
+            <h3 *ngIf="newCategory.categoryId; else addCategoryTitle">Edit Category</h3>
+            <ng-template #addCategoryTitle>
+              <h3>Add New Category</h3>
+            </ng-template>
+            <form (ngSubmit)="newCategory.categoryId ? updateCategory() : addCategory()" class="form-inline">
+              <div class="form-group">
+                <label for="categoryTitle">Category Title:</label>
+                <input type="text" class="form-control ml-1" id="categoryTitle" [(ngModel)]="newCategory.title" name="title" required>
+              </div>
+              <div class="form-group">
+                <label for="categoryDescription">Category Description:</label>
+                <input type="text" class="form-control ml-1" id="categoryDescription" [(ngModel)]="newCategory.description" name="description" required>
+              </div>
+              <div class="form-group">
+                <label for="categoryBenefits">Category Benefits:</label>
+                <input type="text" class="form-control ml-1" id="categoryBenefits" [(ngModel)]="newCategory.benefits" name="benefits" required>
+              </div>
+              <button type="submit" class="btn btn-primary ml-2">{{ newCategory.categoryId ? 'Update' : 'Submit' }}</button>
+            </form>
+          </div>
+        </div>
+      </section>
+  
+      <div class="search-bar col-md-6 col-12 mt-3">
+        <label class="d-flex align-items-center">
+          <!-- Dropdown box for selecting criteria -->
+          <select class="form-control" [(ngModel)]="selectedCriteria" (change)="onCriteriaChange()">
+            <option value="title">Title</option>
+            <option value="description">Description</option>
+            <option value="benefits">Benefits</option>
+            <option value="categoryId">Category ID</option>
+          </select>
+          <!-- Search input -->
+          <input type="search" placeholder="Search" class="form-control ml-1" [(ngModel)]="searchKeyword" (input)="getCategoriesdyn()">
+        </label>
+      </div>
+      
+
+    </div>
+  
+
+    <div class="table-responsive">
+  
+  
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Category ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Benefits</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories | paginate: { itemsPerPage: 4, currentPage: p }">
+            <td>{{ category.categoryId }}</td>
+            <td>{{ category.title }}</td>
+            <td>{{ category.description }}</td>
+            <td>{{ category.benefits }}</td>
+            <td>
+              <button class="btn btn-primary ml-1" (click)="editCategory(category)">Edit</button>
+              <button class="btn btn-danger ml-1" (click)="deleteCategory(category.categoryId)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="my-4" (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+  
