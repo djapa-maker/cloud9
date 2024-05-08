@@ -5,43 +5,80 @@
   </div>
 
   <h2>Register</h2>
-  <form (ngSubmit)="registerUser()">
+  <form #exerciseForm="ngForm" (ngSubmit)="registerUser()">
     <div class="form-group">
       <label for="firstname">First name</label>
       <input
+        required minlength="4"
         id="firstname"
         name="firstname"
         required type="text"
         [(ngModel)]="registerRequest.firstname"
       >
     </div>
+    <div *ngIf="exerciseForm.controls['firstname'].invalid && (exerciseForm.controls['firstname'].dirty || exerciseForm.controls['firstname'].touched)"  class="text-danger mt-1">
+      <span *ngIf="exerciseForm.controls['firstname'].errors?.['required']">firstname is required.</span>
+      <span *ngIf="exerciseForm.controls['firstname'].errors?.['minlength']">firstname must be at least 4 characters long.</span>
+    </div>
     <div class="form-group">
       <label for="lastname">Last name</label>
       <input
+        required minlength="4"
         id="lastname"
         name="lastname"
         required type="text"
         [(ngModel)]="registerRequest.lastname"
       >
     </div>
+    <div *ngIf="exerciseForm.controls['lastname'].invalid && (exerciseForm.controls['lastname'].dirty || exerciseForm.controls['lastname'].touched)"  class="text-danger mt-1">
+      <span *ngIf="exerciseForm.controls['lastname'].errors?.['required']">lastname is required.</span>
+      <span *ngIf="exerciseForm.controls['lastname'].errors?.['minlength']">lastname must be at least 4 characters long.</span>
+    </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input
         id="email"
+        pattern=".+@esprit\.tn$"
         name="email"
-        required type="text"
+        required
+        type="text"
         [(ngModel)]="registerRequest.email"
       >
     </div>
+    <div *ngIf="exerciseForm.controls['email'].invalid && (exerciseForm.controls['email'].dirty || exerciseForm.controls['email'].touched)" class="text-danger mt-1">
+  <span *ngIf="exerciseForm.controls['email'].errors?.['pattern']">
+    Invalid email address. Must end with "@esprit.tn".
+  </span>
+      <span *ngIf="exerciseForm.controls['email'].errors?.['required']">
+    Email is required.
+  </span>
+    </div>
+
     <div class="form-group">
       <label for="password">Password</label>
       <input
-        id="password"
+        required
+        minlength="8"
+        pattern="^(?=.*\d).{8,}$"  id="password"
         name="password"
-        required type="password"
+        required
+        type="password"
         [(ngModel)]="registerRequest.password"
       >
     </div>
+    <div *ngIf="exerciseForm.controls['password'].invalid && (exerciseForm.controls['password'].dirty || exerciseForm.controls['password'].touched)" class="text-danger mt-1">
+  <span *ngIf="exerciseForm.controls['password'].errors?.['minlength']">
+    password must be at least 8 characters long.
+  </span>
+      <span *ngIf="exerciseForm.controls['password'].errors?.['pattern']">
+    password must contain at least one number.
+  </span>
+      <span *ngIf="exerciseForm.controls['password'].errors?.['required']">
+    password is required.
+  </span>
+    </div>
+
+
 
     <div class="form-group">
       <label for="role">Role:</label>
@@ -60,7 +97,7 @@
       >
       <label for="rememberMe">Enable 2FA (Two Factors Authentication)</label>
     </div>
-    <button type="submit">Register</button>
+    <button [disabled]="exerciseForm.invalid" type="submit">Register</button>
     <a routerLink="/login">Login</a>
   </form>
 </div>

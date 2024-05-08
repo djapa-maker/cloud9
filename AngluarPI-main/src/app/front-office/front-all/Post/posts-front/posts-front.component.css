@@ -1,4 +1,38 @@
-/*
+.card {
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .card-content {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .card-date, .card-likes, .comment-info, .author-info {
+    font-size: 0.9rem;
+    color: #999;
+  }
+  
+  .card-footer a {
+    text-decoration: none;
+  }
+  
+  .card-footer a:hover {
+    text-decoration: underline;
+  }
+  
+
+
+  /*
 
 TemplateMo 553 Xtra Blog
 

@@ -8,6 +8,7 @@ export class Post {
   datePosted: string; // Assuming date is serialized as string
   likes: number;
   dislikes: number;
+  image ?: string;
   comments: Comment[];
   exercises: Exercise[];
 }

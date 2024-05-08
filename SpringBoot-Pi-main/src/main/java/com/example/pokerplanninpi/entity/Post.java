@@ -35,4 +35,7 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="post")
     @JsonIgnore
     private Set<Comment> comments;
+    @ManyToMany(mappedBy="posts", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Exercice> exercices;
 }

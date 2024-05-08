@@ -15,6 +15,7 @@ export class LoginComponent {
 
   authRequest: AuthenticationRequest = {};
   otpCode = '';
+  errorMessage= '';
   authResponse: AuthenticationResponse = {};
 
   constructor(
@@ -37,11 +38,13 @@ export class LoginComponent {
               localStorage.getItem('userID');
               this.fetchUserDetailsAndNavigate();
             }, (error) => {
+
               console.error('Error getting user ID:', error);
             });
           }
         },
         error:(err)=>{
+          this.errorMessage = 'Email or password incorrect.';
           console.log(err);
         }
       });

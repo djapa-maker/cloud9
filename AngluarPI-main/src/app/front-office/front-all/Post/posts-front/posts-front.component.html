@@ -1,28 +1,43 @@
-<div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12">
-        <div class="row tm-row">
-          <article class="col-12 col-md-6 tm-post" *ngFor="let post of posts">
-            <hr class="tm-hr-primary">
-            <a href="/post-detail/{{ post.id }}" class="effect-lily tm-post-link tm-pt-60">
-              <div class="tm-post-link-inner">
-                <img width="200" height="100" [src]="'data:image/jpeg;base64,' + post.image" alt="post Image" />                            
+<div class="container tm-background-img">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="row tm-row">
+        <ng-container *ngFor="let exercise of exercises">
+          <ng-container *ngFor="let post of exercise.posts">
+            <div class="col-12 col-md-6 back" *ngIf="post">
+              <div class="card mb-4 shadow-sm tm-card">
+                <div class="card-header bg-primary text-white">
+                  <h4 class="card-title">{{ exercise.title }}</h4>
+                </div>
+             <!--  <img [src]="'data:image/jpeg;base64,' + post.image" class="card-img-top" alt="Post Image">--> 
+                <div class="card-body">
+                  <h5 class="card-author mb-2">Author: <span class="text-secondary">{{ post.author }}</span></h5>
+                  <p class="card-content mb-3">{{ post.content }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="card-date">
+                      <i class="bx bx-calendar"></i> Date: {{ post.datePosted }}
+                    </div>
+                    <div class="card-likes">
+                      <i class="bx bx-like"></i> Likes: {{ post.likes }}
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="comment-info">
+                      <i class="bx bx-comment"></i> Comments: {{ post.comments?.length || 0 }}
+                    </div>
+                    <div class="author-info">
+                      by {{ post.author }}
+                    </div>
+                  </div>
+                  <a href="/post-detail/{{ post.id }}" class="btn btn-primary mt-3">Read More</a>
+                </div>
               </div>
-              <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ post.author }}</h2>
-            </a>                    
-            <p class="tm-pt-30">{{ post.content }}</p>
-            <div class="d-flex justify-content-between tm-pt-45">
-              <span class="tm-color-primary">{{ post.datePosted }}</span>
-              <span class="tm-color-primary">{{ post.likes }} likes</span>
             </div>
-            <hr>
-            <div class="d-flex justify-content-between">
-              <span>{{ post.comments?.length || 0 }} comments</span>
-              <span>by {{ post.author}}</span>
-            </div>
-          </article>
-        </div>
+          </ng-container>
+        </ng-container>
       </div>
     </div>
   </div>
-  
+</div>

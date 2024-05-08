@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Exercise } from 'src/app/model/exercise/exercise.model';
 import { Post } from 'src/app/model/post';
+import { SExerciseService } from 'src/app/services/exercise/s-exercise.service';
 import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
@@ -9,11 +11,12 @@ import { PostService } from 'src/app/services/post/post.service';
 })
 export class PostsFrontComponent implements OnInit {
   posts: Post[] = []; // Array to store retrieved posts
-
-  constructor(private postService: PostService) { }
+  exercises: Exercise[] = [];
+  constructor(private postService: PostService,private exerciseService: SExerciseService) { }
 
   ngOnInit(): void {
     this.getPosts(); // Call the method to retrieve posts when the component initializes
+    this.getExercises();
   }
 
   // Method to retrieve posts from the service
@@ -28,6 +31,17 @@ export class PostsFrontComponent implements OnInit {
       }
     );
   }
-
+  getExercises(): void {
+    
+    this.exerciseService.getAllExercises().subscribe(
+      (data: Exercise[]) => {
+        this.exercises = data;
+        console.log('hehda eli jeni:', data);
+      },
+      error => {
+        console.error('Error while retrieving exercises', error);
+      }
+    );
+  }
   
 }
